@@ -25,7 +25,11 @@ var Header = React.createClass({
   },
   handleClick: function() {
     // send value of text input toe Firebase
-    console.log(this.state.text)
+    this.props.itemsStore.push({
+      text: this.state.text,
+      done: false
+    });
+    this.setState({text: ''});
   },
   handleInputChange: function(event) {
     this.setState({text: event.target.value})
