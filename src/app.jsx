@@ -14,9 +14,9 @@ var App = React.createClass({
     }
   },
   componentWillMount: function() {
-    fb = new Firebase(rootUrl + 'items/');  // make the data stored at firebaseio.com/items an object and
-    this.bindAsObject(fb, 'items');         // make it available as this.state.items within the component
-    fb.on('value', this.handleDataLoaded);  // listen for data changes
+    this.fb = new Firebase(rootUrl + 'items/');  // make the data stored at firebaseio.com/items an object and
+    this.bindAsObject(this.fb, 'items');         // make it available as this.state.items within the component
+    this.fb.on('value', this.handleDataLoaded);  // listen for data changes
   },
   render: function() {
     return <div className="row panel panel-default">
@@ -28,9 +28,32 @@ var App = React.createClass({
         <hr />
         <div className={"content " + (this.state.loaded ? 'loaded' : '')}>
           <List items={this.state.items} />
+          {this.deleteButton()}
         </div>
       </div>
     </div>
+  },
+  deleteButton: function() {
+    if (!this.state.loaded) {
+      return
+    } else {
+      return <div className="text-center clear-complete">
+        <hr />
+        <button
+          type="button"
+          onClick={this.onDeleteDoneClick}
+          className="btn btn-default">
+          Clear Complete
+        </button>
+      </div>
+    }
+  },
+  onDeleteDoneClick: function() {
+    for (var key in this.state.items) {
+      if (this.state.items[key].done === true) {
+        this.fb.child(key).remove();
+      }
+    }
   },
   handleDataLoaded: function() {
     this.setState({loaded: true});
