@@ -26,7 +26,11 @@ var ListItem = React.createClass({
         value={this.state.text}
         />
       <span className="input-group-btn">
-        <button className="btn btn-default">Delete</button>
+        <button
+          className="btn btn-default"
+          onClick={this.handleDeleteClick} >
+          Delete
+        </button>
       </span>
     </div>
   },
@@ -34,6 +38,9 @@ var ListItem = React.createClass({
     var update = {done: event.target.checked};
     this.setState(update);
     this.fb.update(update);
+  },
+  handleDeleteClick: function() {
+    this.fb.remove();
   }
 });
 
