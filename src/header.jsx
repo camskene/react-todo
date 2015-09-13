@@ -24,7 +24,7 @@ var Header = React.createClass({
     </div>
   },
   handleClick: function() {
-    // send value of text input toe Firebase
+    // send value of text input to Firebase
     this.props.itemsStore.push({
       text: this.state.text,
       done: false
