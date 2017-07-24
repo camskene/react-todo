@@ -1,4 +1,5 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const ReactFire = require('reactfire');
 const Firebase = require('firebase');
 const Header = require('./header');
@@ -68,4 +69,4 @@ const App = React.createClass({
 });
 
 const element = React.createElement(App, {});
-React.render(element, document.querySelector('.container'));
+ReactDOM.render(element, document.querySelector('.container'));
