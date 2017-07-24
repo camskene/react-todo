@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const gutil = require('gulp-util');
 const source = require('vinyl-source-stream');
 const browserify = require('browserify');
 const watchify = require('watchify');
@@ -8,9 +7,8 @@ const notifier = require('node-notifier');
 const server = require('gulp-server-livereload');
 const concat = require('gulp-concat');
 const sass = require('gulp-sass');
-const watch = require('gulp-watch');
 
-const notify = function (error) {
+const notify = (error) => {
   let message = 'In: ';
   let title = 'Error: ';
 
@@ -55,7 +53,7 @@ gulp.task('build', () => {
   bundle();
 });
 
-gulp.task('serve', (done) => {
+gulp.task('serve', () => {
   gulp.src('')
     .pipe(server({
       livereload: {
