@@ -55,11 +55,11 @@ const App = React.createClass({
   },
 
   onDeleteDoneClick() {
-    for (var key in this.state.items) {
+    Object.keys(this.state.items).forEach((key) => {
       if (this.state.items[key].done === true) {
         this.fb.child(key).remove();
       }
-    }
+    });
   },
 
   handleDataLoaded() {
